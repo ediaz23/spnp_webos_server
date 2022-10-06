@@ -1,6 +1,6 @@
 
 const express = require('express')
-const { webosService } = require('spnp_webos_service')
+const { webosService } = require('./spnp_webos_service/index')
 const cors = require('cors')
 const app = express()
 
@@ -10,8 +10,11 @@ const port = 8051
 
 router.post('/', async (req, res) => {
     const { body } = req
-
     const { method } = body
+    delete body.method
+    
+    console.log(`req ${method}`)
+    console.log(body)
     const message = {
         respond: response => {
             if (response) {
@@ -28,7 +31,7 @@ router.post('/', async (req, res) => {
                 res.sendStatus(200)
             }
         },
-        payload: body
+        payload: body.payload || {}
     }
     if (method) {
         webosService[method](message)
