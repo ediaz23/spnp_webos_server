@@ -1,6 +1,6 @@
 
 const express = require('express')
-const { webosService } = require('./spnp_webos_service/index')
+const { webosService } = require('../spnp_webos_service/index')
 const cors = require('cors')
 const app = express()
 
